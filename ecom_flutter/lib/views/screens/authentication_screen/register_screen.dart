@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RegisterScreen extends StatelessWidget {
-  // const RegisterScreen({super.key});
+  RegisterScreen({super.key});
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final AuthController _authController = AuthController();
   late String email;
   late String fullName;
   late String password;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class RegisterScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Create Your Accounts",
+                    "Create Your Account",
                     style: GoogleFonts.getFont(
                       'Lato',
                       color: Color(0xFF0d120E),

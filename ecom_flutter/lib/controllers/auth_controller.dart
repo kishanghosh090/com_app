@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ecom_app/global_variable.dart';
 import 'package:ecom_app/models/user.dart';
 import 'package:ecom_app/services/manage_http_reponse.dart';
@@ -39,6 +41,28 @@ class AuthController {
         },
       );
     } catch (e) {
+      print(e);
+    }
+  }
+
+  // sign in users function
+  Future<void> signInUsers({
+    required context,
+    required String email,
+    required String password,
+  }) async {
+    http.Response response = await http.post(
+      Uri.parse('$uri/auth/signIn'),
+      body: jsonEncode({'email': email, 'password': password}),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    // handle response
+    manageHttpResponse(response: response, context: context, onSuccess: () {
+      
+    });
+    try {} catch (e) {
       print(e);
     }
   }

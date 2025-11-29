@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema(
           const result = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
           return result.test(value);
         },
-        message: "please enter a valid emial",
+        message: "please enter a valid email",
       },
     },
     state: {
