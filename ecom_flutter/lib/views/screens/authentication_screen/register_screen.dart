@@ -3,15 +3,38 @@ import 'package:ecom_app/views/screens/authentication_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class RegisterScreen extends StatelessWidget {
-  RegisterScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  @override
+  State<RegisterScreen> createState() => _RegisterScreen();
+}
+
+class _RegisterScreen extends State<RegisterScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final AuthController _authController = AuthController();
   late String email;
   late String fullName;
   late String password;
 
+  bool isLoding = false;
 
+  signUpUser() async {
+    setState(() {
+      isLoding = true;
+    });
+
+    await _authController
+        .signUpUsers(
+          context: context,
+          email: email,
+          fullName: fullName,
+          password: password,
+        )
+        .whenComplete(() {
+          setState(() {
+            isLoding = false;
+          });
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -204,12 +227,7 @@ class RegisterScreen extends StatelessWidget {
                       if (_formKey.currentState!.validate()) {
                         // print("correct");
 
-                        await _authController.signUpUsers(
-                          context: context,
-                          email: email,
-                          fullName: fullName,
-                          password: password,
-                        );
+                        signUpUser();
                       } else {
                         print("failed");
                       }
@@ -294,15 +312,17 @@ class RegisterScreen extends StatelessWidget {
                             ),
                           ),
                           Center(
-                            child: Text(
-                              "Sign Up",
-                              style: GoogleFonts.getFont(
-                                'Lato',
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
+                            child: isLoding
+                                ? CircularProgressIndicator(color: Colors.white)
+                                : Text(
+                                    "Sign Up",
+                                    style: GoogleFonts.getFont(
+                                      'Lato',
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                           ),
                         ],
                       ),

@@ -21,6 +21,7 @@ class AuthController {
         city: '',
         locality: '',
         password: password,
+        token: '',
       );
 
       http.Response response = await http.post(
@@ -59,9 +60,7 @@ class AuthController {
       },
     );
     // handle response
-    manageHttpResponse(response: response, context: context, onSuccess: () {
-      
-    });
+    manageHttpResponse(response: response, context: context, onSuccess: () {});
     try {} catch (e) {
       print(e);
     }
