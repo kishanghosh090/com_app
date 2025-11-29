@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 class User {
+  // define field
   final String id;
   final String fullName;
   final String email;
@@ -61,4 +62,7 @@ class User {
       password: map['password'] as String? ?? "",
     );
   }
+  //fromJson: this factory constructor takes json string and decodes into a Map<String, dynamic> and then uses formMap to convert that Map into a User Object
+
+  factory User.fromJson(String source) => User.fromMap(json.decode(source) as Map<String, dynamic>);
 }
