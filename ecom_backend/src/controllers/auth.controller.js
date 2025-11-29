@@ -2,6 +2,7 @@ import { User } from "../models/user.models.js";
 
 const signUp = async (req, res) => {
   const { fullName, email, password } = req.body;
+
   try {
     const user = await User.findOne({ email });
     if (user) {
@@ -38,7 +39,7 @@ const signIn = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    
+
     return res.status(500).json({ message: "Internal server error" });
   }
 };
