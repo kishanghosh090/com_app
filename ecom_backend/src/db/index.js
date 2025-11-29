@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { DB_NAME } from "../constant.js";
-import winston from "winston";
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
@@ -13,7 +12,6 @@ const connectToDB = async () => {
     const db = await mongoose.connect(`${MONGODB_URI}/${DB_NAME}`);
     return db.connection.host;
   } catch (error) {
-    winston.error(error.message);
     print("mongodb connection failed");
     process.exit(1);
   }

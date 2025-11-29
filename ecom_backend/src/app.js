@@ -23,4 +23,10 @@ app.use(cookieParser());
 import authRoutes from "./routes/auth.routes.js";
 
 app.use("/api/v1/auth", authRoutes);
+
+// error handler
+
+app.use((err, req, res, next) => {
+  return res.json();
+});
 export { app };
