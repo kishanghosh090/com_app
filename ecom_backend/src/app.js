@@ -26,7 +26,7 @@ app.use("/api/v1/auth", authRoutes);
 
 // error handler
 
-app.use((err, req, res, next) => {
-  return res.json();
-});
+// app.use((err, req, res, next) => {
+//   return res.s.json();
+// });
 export { app };
