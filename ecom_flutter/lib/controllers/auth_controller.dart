@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:ecom_app/global_variable.dart';
 import 'package:ecom_app/models/user.dart';
 import 'package:ecom_app/services/manage_http_reponse.dart';
+import 'package:ecom_app/views/screens/authentication_screen/login_screen.dart';
+import 'package:ecom_app/views/screens/main_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class AuthController {
@@ -38,6 +41,10 @@ class AuthController {
         response: response,
         context: context,
         onSuccess: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LoginScreen()),
+          );
           showSnackBar(context, "Account has been created ");
         },
       );
@@ -52,16 +59,27 @@ class AuthController {
     required String email,
     required String password,
   }) async {
-    http.Response response = await http.post(
-      Uri.parse('$uri/auth/signIn'),
-      body: jsonEncode({'email': email, 'password': password}),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-    );
-    // handle response
-    manageHttpResponse(response: response, context: context, onSuccess: () {});
-    try {} catch (e) {
+    try {
+      http.Response response = await http.post(
+        Uri.parse('$uri/auth/signIn'),
+        body: jsonEncode({'email': email, 'password': password}),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+      // handle response
+      manageHttpResponse(
+        response: response,
+        context: context,
+        onSuccess: () {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => MainScreen()),
+            (route) => false,
+          );
+        },
+      );
+    } catch (e) {
       print(e);
     }
   }
