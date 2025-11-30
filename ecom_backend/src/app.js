@@ -19,12 +19,15 @@ app.use(express.static("public"));
 
 // Middleware for parsing cookies
 app.use(cookieParser());
+
 // routes
 import authRoutes from "./routes/auth.routes.js";
 import bannerRoutes from "./routes/banner.routes.js";
+import categoryRoutes from "./routes/category.routes.js";
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/banner", bannerRoutes);
+app.use("/api/v1/category", categoryRoutes);
 
 // error handler
 
