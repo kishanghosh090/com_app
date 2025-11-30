@@ -1,0 +1,10 @@
+import mongoose from "mongoose";
+
+const bannerSchema = mongoose.Schema({
+  image: {
+    type: String,
+    required: true,
+  },
+});
+
+export const Banner = mongoose.model("Banner", bannerSchema);
