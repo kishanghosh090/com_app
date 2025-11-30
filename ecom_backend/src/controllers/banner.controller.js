@@ -1,6 +1,6 @@
 import { Banner } from "../models/banner.models.js";
 
-const banner = async (req, res) => {
+const createBanner = async (req, res) => {
   try {
     const { image } = req.body;
     if (!image) {
@@ -14,4 +14,13 @@ const banner = async (req, res) => {
   }
 };
 
-export { banner };
+const getBanner = async (req, res) => {
+  try {
+    const banner = await Banner.find();
+    return res.status(200).send(banner);
+  } catch (error) {
+    return res.status(400).json({ error: e.message });
+  }
+};
+
+export { createBanner, getBanner };

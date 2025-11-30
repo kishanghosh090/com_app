@@ -1,8 +1,9 @@
 import express from "express";
-import { banner } from "../controllers/banner.controller.js";
+import { createBanner, getBanner } from "../controllers/banner.controller.js";
 
 const router = express.Router();
 
-router.post("/", banner);
+router.post("/", createBanner);
+router.get("/", getBanner);
 
 export default router;
