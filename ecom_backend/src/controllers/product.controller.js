@@ -28,4 +28,15 @@ const addProduct = async (req, res) => {
   }
 };
 
-export { addProduct };
+const getPopulerProject = async (req, res) => {
+  try {
+    const populerProducts = await Product.find({ popular: true });
+    if (!populerProducts || populerProducts.length == 0) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    return res.status(200).json({ populerProducts });
+  } catch (error) {
+    return res.status(500).json({ error: e.message });
+  }
+};
+export { addProduct, getPopulerProject };
