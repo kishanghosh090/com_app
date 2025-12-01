@@ -17,6 +17,22 @@ const createSubCategory = async (req, res) => {
   }
 };
 
-export {
-  createSubCategory
-}
+const getSubCategoryByName = async (req, res) => {
+  try {
+    const { categoryName } = req.params;
+    const subCategoryByName = await subCategory.findOne({
+      subCategoryName: categoryName,
+    });
+    if (!subCategoryByName || subCategoryByName.length == 0) {
+      return res
+        .status(404)
+        .json({ message: "category which you search not found" });
+    } else {
+      return res.status(200).json(subCategoryByName);
+    }
+  } catch (error) {
+    return res.status(500).json({ error: e.message });
+  }
+};
+
+export { createSubCategory, getSubCategoryByName };

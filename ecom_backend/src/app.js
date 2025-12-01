@@ -30,6 +30,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/banner", bannerRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/subCategory", subCategoryRoutes);
+
 // error handler
 
 // app.use((err, req, res, next) => {
