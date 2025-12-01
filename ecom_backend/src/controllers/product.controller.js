@@ -28,7 +28,7 @@ const addProduct = async (req, res) => {
   }
 };
 
-const getPopulerProject = async (req, res) => {
+const getPopulerProduct = async (req, res) => {
   try {
     const populerProducts = await Product.find({ popular: true });
     if (!populerProducts || populerProducts.length == 0) {
@@ -39,4 +39,16 @@ const getPopulerProject = async (req, res) => {
     return res.status(500).json({ error: e.message });
   }
 };
-export { addProduct, getPopulerProject };
+
+const getRecomendedProduct = async (req, res) => {
+  try {
+    const recomendedProducts = await Product.find({ recomended: true });
+    if (!recomendedProducts || recomendedProducts.length == 0) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    return res.status(200).json({ recomendedProducts });
+  } catch (error) {
+    return res.status(500).json({ error: e.message });
+  }
+};
+export { addProduct, getPopulerProduct, getRecomendedProduct };
