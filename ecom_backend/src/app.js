@@ -25,11 +25,13 @@ import authRoutes from "./routes/auth.routes.js";
 import bannerRoutes from "./routes/banner.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
 import subCategoryRoutes from "./routes/subCategory.routes.js";
+import productRoutes from "./routes/product.route.js";
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/banner", bannerRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/subCategory", subCategoryRoutes);
+app.use("/api/v1/product", productRoutes);
 
 // error handler
 
