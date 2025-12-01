@@ -65,6 +65,14 @@ class _MainScreenState extends State<MainScreen> {
         onSelected: (item) {
           screenSelectot(item);
         },
+        header: Container(
+          height: 50,
+          width: double.infinity,
+          decoration: BoxDecoration(color: Colors.black),
+          child: Center(
+            child: Text("Mac store", style: TextStyle(color: Colors.white)),
+          ),
+        ),
         items: const [
           AdminMenuItem(
             title: 'Vendors',
