@@ -126,12 +126,37 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(10.0),
             child: ElevatedButton(
               onPressed: () async {
                 await pickImage();
               },
-              child: Text("Pick Image"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                elevation: 8,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 15,
+                ),
+                textStyle: const TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1,
+                ),
+              ),
+
+              child: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.image, size: 15),
+                  SizedBox(width: 8),
+                  Text("Pick Image"),
+                ],
+              ),
             ),
           ),
           Divider(color: Colors.blueGrey.shade700),
@@ -148,12 +173,37 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           ),
 
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(10.0),
             child: ElevatedButton(
               onPressed: () async {
-                await pickImage();
+                await pickBannerImage();
               },
-              child: Text("Pick Image"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                elevation: 8,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 15,
+                ),
+                textStyle: const TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1,
+                ),
+              ),
+
+              child: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.image, size: 15),
+                  SizedBox(width: 8),
+                  Text("Pick Image"),
+                ],
+              ),
             ),
           ),
         ],
