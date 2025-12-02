@@ -33,18 +33,18 @@ class _BannerWidgetsState extends State<BannerWidgets> {
         } else if (!snapshot.hasData || !snapshot.data!.isNotEmpty) {
           return Center(child: Text("No banners"));
         } else {
-          final banners = snapshot.data;
-          return SizedBox(
-            height: 400,
-            child: ListView.builder(
-              itemCount: banners!.length,
+          final banners = snapshot.data!;
+          return Expanded(
+            child: GridView.builder(
+              itemCount: banners.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 6,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+              ),
               itemBuilder: (context, index) {
                 final banner = banners[index];
-                return Padding(
-                  
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.network(width: 100, height: 100, banner.image),
-                );
+                return Image.network(banner.image, height: 100, width: 100);
               },
             ),
           );

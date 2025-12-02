@@ -13,7 +13,7 @@ class UploadBannerScreen extends StatefulWidget {
 
 class _UploadBannerScreenState extends State<UploadBannerScreen> {
   dynamic _image;
-  Widget? banners = null;
+
   BannerController _bannerController = BannerController();
   pickImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -29,9 +29,7 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
     }
   }
 
-  Widget getBanners() {
-    return BannerWidgets();
-  }
+
 
   @override
   Widget build(BuildContext context) {
