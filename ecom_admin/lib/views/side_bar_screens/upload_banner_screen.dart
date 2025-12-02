@@ -6,6 +6,20 @@ class UploadBannerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("upload"));
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            alignment: Alignment.topLeft,
+            child: Text(
+              "Banners",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            ),
+          ),
+        ),
+        Divider(color: Colors.green, thickness: 2),
+      ],
+    );
   }
 }
