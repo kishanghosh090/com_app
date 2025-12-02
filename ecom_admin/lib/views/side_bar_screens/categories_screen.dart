@@ -1,3 +1,4 @@
+import 'package:ecom_admin/controllers/category_controller.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   dynamic _image;
   dynamic _bannerImage;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final CategoryController _categoryController = CategoryController();
 
   pickImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -109,9 +112,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       child: Text("cancel"),
                     ),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          print(categoryName);
+                        await  _categoryController.uploadCategory(
+                            pickedImage: _image,
+                            pickedBanner: _bannerImage,
+                          );
                         }
                       },
                       style: ElevatedButton.styleFrom(
