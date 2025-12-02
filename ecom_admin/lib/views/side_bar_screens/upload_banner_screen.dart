@@ -1,4 +1,5 @@
 import 'package:ecom_admin/controllers/banner_controller.dart';
+import 'package:ecom_admin/views/side_bar_screens/banner_widgets.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,7 @@ class UploadBannerScreen extends StatefulWidget {
 
 class _UploadBannerScreenState extends State<UploadBannerScreen> {
   dynamic _image;
+  Widget? banners = null;
   BannerController _bannerController = BannerController();
   pickImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -25,6 +27,10 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
     } else {
       // User canceled the picker
     }
+  }
+
+  Widget getBanners() {
+    return BannerWidgets();
   }
 
   @override
@@ -109,6 +115,8 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
               ),
             ),
           ),
+          Divider(color: Colors.black),
+          BannerWidgets(),
         ],
       ),
     );

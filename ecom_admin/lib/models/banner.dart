@@ -9,12 +9,12 @@ class BannerModel {
     return <String, dynamic>{'id': id, 'image': image};
   }
 
-  factory BannerModel.fromMap(Map<String, dynamic> map) {
+  factory BannerModel.fromJson(Map<String, dynamic> map) {
     return BannerModel(id: map['_id'] as String, image: map['image'] as String);
   }
 
   String toJson() => json.encode(toMap());
 
-  factory BannerModel.fromJson(String source) =>
-      BannerModel.fromMap(json.decode(source));
+  // factory BannerModel.fromJson(String source) =>
+  //     BannerModel.fromMap(json.decode(source));
 }
