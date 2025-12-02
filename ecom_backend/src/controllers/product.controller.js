@@ -11,7 +11,19 @@ const addProduct = async (req, res) => {
       subCategory,
       images,
     } = req.body;
-
+    if (
+      [
+        productName,
+        productPrice,
+        quantity,
+        description,
+        category,
+        subCategory,
+        images,
+      ].some((val) => val == undefined)
+    ) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
     const product = new Product(
       productName,
       productPrice,
@@ -22,6 +34,11 @@ const addProduct = async (req, res) => {
       images
     );
     await product.save();
+    if (!product) {
+      return res
+        .status(500)
+        .json({ message: "product creation failed. try again later" });
+    }
     return res.status(201).json(product);
   } catch (error) {
     return res.status(500).json({ error: e.message });

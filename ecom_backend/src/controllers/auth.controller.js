@@ -2,6 +2,9 @@ import { User } from "../models/user.models.js";
 
 const signUp = async (req, res) => {
   const { fullName, email, password } = req.body;
+  if (!fullName || !email || !password) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
 
   try {
     const user = await User.findOne({ email });
@@ -10,13 +13,16 @@ const signUp = async (req, res) => {
     } else {
       let newUser = new User({ fullName, email, password });
       newUser = await newUser.save();
+      if (!newUser) {
+        return res
+          .status(500)
+          .json({ message: "User creation failed. please try again later." });
+      }
       return res
         .status(200)
         .json({ success: true, message: "user created successfully" });
     }
   } catch (error) {
-    console.log(error);
-
     return res
       .status(500)
       .json({ message: error.message || "Internal server error" });
@@ -25,7 +31,9 @@ const signUp = async (req, res) => {
 const signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    if (!email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
     const isUserHave = await User.findOne({ email });
     if (!isUserHave) {
       return res.status(400).json({ message: "User not found" });
@@ -40,8 +48,6 @@ const signIn = async (req, res) => {
       return res.status(400).json({ message: "Incorrect password" });
     }
   } catch (error) {
-    console.log(error);
-
     return res.status(500).json({ message: "Internal server error" });
   }
 };

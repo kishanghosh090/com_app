@@ -8,6 +8,12 @@ const createBanner = async (req, res) => {
     }
     const banner = new Banner({ image });
     await banner.save();
+
+    if (!banner) {
+      return res
+        .status(500)
+        .json({ message: "banner uploading failed. try again later" });
+    }
     return res.status(201).send(banner);
   } catch (error) {
     return res.status(400).json({ error: e.message });
