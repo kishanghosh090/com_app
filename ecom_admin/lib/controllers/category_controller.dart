@@ -1,11 +1,16 @@
 import 'dart:typed_data';
-
+import 'package:ecom_admin/global_variabes.dart';
+import 'package:ecom_admin/services/manage_http_reponse.dart';
+import 'package:http/http.dart' as http;
 import 'package:cloudinary_public/cloudinary_public.dart';
+import 'package:ecom_admin/models/category.dart';
 
 class CategoryController {
   uploadCategory({
     required dynamic pickedImage,
     required dynamic pickedBanner,
+    required String name,
+    required context,
   }) async {
     try {
       // convert to byte image
@@ -28,7 +33,7 @@ class CategoryController {
         ),
       );
 
-      print(imageResponse);
+      String image = imageResponse.secureUrl;
 
       CloudinaryResponse bannerResponse = await cloudinary.uploadFile(
         CloudinaryFile.fromByteData(
@@ -37,7 +42,30 @@ class CategoryController {
           folder: 'categoryImages',
         ),
       );
-      print(bannerResponse);
+      String banner = bannerResponse.secureUrl;
+
+      Category category = Category(
+        id: "",
+        name: name,
+        image: image,
+        banner: banner,
+      );
+
+      http.Response res = await http.post(
+        Uri.parse("$uri/category"),
+        body: category.toJson(),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+
+      manageHttpResponse(
+        response: res,
+        context: context,
+        onSuccess: () {
+          showSnackBar(context, "category uploaded");
+        },
+      );
     } catch (e) {
       print(e);
     }

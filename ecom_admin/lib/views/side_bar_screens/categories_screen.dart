@@ -114,9 +114,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                        await  _categoryController.uploadCategory(
+                          await _categoryController.uploadCategory(
                             pickedImage: _image,
                             pickedBanner: _bannerImage,
+                            name: categoryName,
+                            context: context,
                           );
                         }
                       },
