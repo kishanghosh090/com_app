@@ -6,7 +6,7 @@ import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:ecom_admin/models/banner.dart';
 
 class BannerController {
-  ploadCategory({required dynamic pickedImage, required context}) async {
+  uploadBanner({required dynamic pickedImage, required context}) async {
     try {
       // convert to byte image
       Uint8List pickedImageBytes = pickedImage;
@@ -22,6 +22,7 @@ class BannerController {
           folder: 'category',
         ),
       );
+      print(imageResponse);
 
       String image = imageResponse.secureUrl;
 
@@ -39,7 +40,7 @@ class BannerController {
         response: res,
         context: context,
         onSuccess: () {
-          showSnackBar(context, "category uploaded");
+          showSnackBar(context, "banner uploaded");
         },
       );
     } catch (e) {

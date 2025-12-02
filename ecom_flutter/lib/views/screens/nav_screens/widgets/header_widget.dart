@@ -22,7 +22,7 @@ class HeaderWidget extends StatelessWidget {
               width: 250,
               height: 50,
               child: TextFormField(
-                validator: (value) {},
+                // validator: (value) {},
                 decoration: InputDecoration(
                   hintText: "Enter text",
                   hintStyle: const TextStyle(fontSize: 14, color: Colors.black),

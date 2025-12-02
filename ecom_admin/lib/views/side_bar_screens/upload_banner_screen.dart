@@ -1,3 +1,4 @@
+import 'package:ecom_admin/controllers/banner_controller.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class UploadBannerScreen extends StatefulWidget {
 
 class _UploadBannerScreenState extends State<UploadBannerScreen> {
   dynamic _image;
-
+  BannerController _bannerController = BannerController();
   pickImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.image,
@@ -61,14 +62,10 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  // if (_formKey.currentState!.validate()) {
-                  //   await _categoryController.uploadCategory(
-                  //     pickedImage: _image,
-                  //     pickedBanner: _bannerImage,
-                  //     name: categoryName,
-                  //     context: context,
-                  //   );
-                  // }
+                  await _bannerController.uploadBanner(
+                    pickedImage: _image,
+                    context: context,
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green.shade200,
