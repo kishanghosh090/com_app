@@ -24,11 +24,11 @@ const userSchema = new mongoose.Schema(
     },
     state: {
       type: String,
-      // required: true,
+      required: true,
     },
     city: {
       type: String,
-      // required: true,
+      required: true,
     },
     locality: {
       type: String,
