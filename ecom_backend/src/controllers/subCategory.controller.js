@@ -3,6 +3,10 @@ import { subCategory } from "../models/subCategory.models.js";
 const createSubCategory = async (req, res) => {
   try {
     const { categoryId, categoryName, image, subCategoryName } = req.body;
+
+    if (!categoryId || !categoryName || !image || !subCategoryName) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
     const subCategories = new subCategory({
       categoryId,
       categoryName,
@@ -20,6 +24,9 @@ const createSubCategory = async (req, res) => {
 const getSubCategoryByName = async (req, res) => {
   try {
     const { categoryName } = req.params;
+    if (!categoryName) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
     const subCategoryByName = await subCategory.findOne({
       subCategoryName: categoryName,
     });
