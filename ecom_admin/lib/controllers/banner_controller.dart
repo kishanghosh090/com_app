@@ -1,0 +1,49 @@
+import 'dart:typed_data';
+import 'package:ecom_admin/global_variabes.dart';
+import 'package:ecom_admin/services/manage_http_reponse.dart';
+import 'package:http/http.dart' as http;
+import 'package:cloudinary_public/cloudinary_public.dart';
+import 'package:ecom_admin/models/banner.dart';
+
+class BannerController {
+  ploadCategory({required dynamic pickedImage, required context}) async {
+    try {
+      // convert to byte image
+      Uint8List pickedImageBytes = pickedImage;
+      final bufferImage = pickedImageBytes.buffer;
+      final ByteData byteDataImage = ByteData.view(bufferImage);
+
+      final cloudinary = CloudinaryPublic("kishanrana", "kishan");
+
+      CloudinaryResponse? imageResponse = await cloudinary.uploadFile(
+        CloudinaryFile.fromByteData(
+          byteDataImage,
+          identifier: 'pickerImage',
+          folder: 'category',
+        ),
+      );
+
+      String image = imageResponse.secureUrl;
+
+      BannerModel banner = BannerModel(id: '', image: image);
+
+      http.Response res = await http.post(
+        Uri.parse('$uri/banner'),
+        body: banner.toJson(),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+
+      manageHttpResponse(
+        response: res,
+        context: context,
+        onSuccess: () {
+          showSnackBar(context, "category uploaded");
+        },
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+}
