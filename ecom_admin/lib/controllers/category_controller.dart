@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 import 'package:ecom_admin/global_variabes.dart';
 import 'package:ecom_admin/services/manage_http_reponse.dart';
@@ -68,6 +69,32 @@ class CategoryController {
       );
     } catch (e) {
       print(e);
+    }
+  }
+
+  // fetch all categories
+
+  Future<List<Category>> loadBanners() async {
+    try {
+      http.Response res = await http.get(
+        Uri.parse('$uri/category'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+
+      if (res.statusCode == 200) {
+        List<dynamic> data = jsonDecode(res.body);
+        List<Category> banners = data
+            .map((category) => Category.fromJson(category))
+            .toList();
+        return banners;
+      } else {
+        // throw exception
+        throw Exception("failed to load banner");
+      }
+    } catch (e) {
+      throw Exception("Error loading banners $e");
     }
   }
 }
