@@ -74,7 +74,7 @@ class CategoryController {
 
   // fetch all categories
 
-  Future<List<Category>> loadBanners() async {
+  Future<List<Category>> loadCategories() async {
     try {
       http.Response res = await http.get(
         Uri.parse('$uri/category'),
@@ -82,19 +82,28 @@ class CategoryController {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
+      print(res.statusCode);
 
       if (res.statusCode == 200) {
+        // List<dynamic> data = jsonDecode(res.body);
+        // List<Category> categories = data
+        //     .map((category) => Category.fromJson(category))
+        //     .toList();
+        // return categories;
+
         List<dynamic> data = jsonDecode(res.body);
-        List<Category> banners = data
+        print(data);
+        List<Category> categories = data
             .map((category) => Category.fromJson(category))
             .toList();
-        return banners;
+        return categories;
       } else {
         // throw exception
-        throw Exception("failed to load banner");
+        throw Exception("failed to load categories");
       }
     } catch (e) {
-      throw Exception("Error loading banners $e");
+      print(e);
+      throw Exception("Error loading categories $e");
     }
   }
 }

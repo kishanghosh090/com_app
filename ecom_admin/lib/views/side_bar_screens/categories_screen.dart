@@ -1,4 +1,5 @@
 import 'package:ecom_admin/controllers/category_controller.dart';
+import 'package:ecom_admin/views/side_bar_screens/category_widgets.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -214,6 +215,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               ),
             ),
           ),
+          CategoryWidgets(),
         ],
       ),
     );
